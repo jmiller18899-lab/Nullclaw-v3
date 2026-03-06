@@ -1,10 +1,15 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import chatRouter from './routes/chat.js';
 import connectorsRouter from './routes/connectors.js';
 import slackRouter from './routes/slack.js';
 import { initSlackBot } from './services/slack.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Catch unhandled rejections so they don't crash the server
 process.on('unhandledRejection', (reason) => {
@@ -26,6 +31,13 @@ app.get('/api/health', (req, res) => {
 app.use('/api/chat', chatRouter);
 app.use('/api/connectors', connectorsRouter);
 app.use('/api/slack', slackRouter);
+
+// Serve frontend static files in production
+const clientDist = path.join(__dirname, '..', 'client', 'dist');
+app.use(express.static(clientDist));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(clientDist, 'index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`Nullclaw Mission Control server running on port ${PORT}`);
