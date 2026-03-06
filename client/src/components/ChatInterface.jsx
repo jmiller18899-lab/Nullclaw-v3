@@ -6,15 +6,15 @@ const API_BASE = '/api';
 const PROVIDERS = [
   { id: 'openai', name: 'OpenAI', models: ['gpt-4o', 'gpt-4o-mini', 'gpt-3.5-turbo'] },
   { id: 'openrouter', name: 'OpenRouter', models: ['anthropic/claude-3.5-sonnet', 'google/gemini-pro', 'meta-llama/llama-3.1-70b-instruct'] },
-  { id: 'gemini', name: 'Gemini', models: ['gemini-2.0-flash-001', 'gemini-1.5-flash', 'gemini-1.5-pro'] },
+  { id: 'gemini', name: 'Gemini', models: ['gemini-2.5-flash', 'gemini-2.5-pro'] },
 ];
 
 export default function ChatInterface() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [provider, setProvider] = useState('openai');
-  const [model, setModel] = useState('gpt-4o-mini');
+  const [provider, setProvider] = useState('openrouter');
+  const [model, setModel] = useState('anthropic/claude-3.5-sonnet');
   const [showProviderMenu, setShowProviderMenu] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);

@@ -15,8 +15,8 @@ const providers = {
   },
   gemini: {
     name: 'Gemini',
-    models: ['gemini-2.0-flash-001', 'gemini-1.5-flash', 'gemini-1.5-pro'],
-    defaultModel: 'gemini-2.0-flash-001',
+    models: ['gemini-2.5-flash', 'gemini-2.5-pro'],
+    defaultModel: 'gemini-2.5-flash',
   },
 };
 
@@ -40,7 +40,7 @@ function getGeminiClient() {
 
 const SYSTEM_PROMPT = `You are Nullclaw, an advanced AI assistant operating from Mission Control. You are helpful, precise, and capable. You assist users with a wide range of tasks including coding, analysis, creative work, and general questions. Be concise but thorough.`;
 
-export async function chat(messages, provider = 'openai', model = null) {
+export async function chat(messages, provider = 'openrouter', model = null) {
   const providerConfig = providers[provider];
   if (!providerConfig) {
     throw new Error(`Unknown provider: ${provider}`);
